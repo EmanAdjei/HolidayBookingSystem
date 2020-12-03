@@ -1,0 +1,58 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+
+namespace Component_A_ClassLibrary.Tests
+{
+    [TestClass()]
+    public class DeleteEmployeeTests
+    {
+
+        private readonly DataClasses1DataContext db = new DataClasses1DataContext();
+
+        [TestMethod()]
+        public void DeleteStaffTest()
+        {
+            // Create a new employee object
+            employee addedEmployee = new employee
+            {
+                FirstName = "Testman",
+                LastName = "MacTest",
+                Password = "TestPassword",
+                Telephone = "09876543234",
+                EmailAddress = "Test@test.ac.uk",
+                Address = "123test-test-test-test",
+                DateJoined = DateTime.Today.Date,
+                StaffID = 987456
+            };
+            Console.WriteLine(" today date is " + DateTime.Today.Date);
+
+            // Create a new Department object
+
+            department addedDept = new department
+            {
+                DeptName = "Carpentry"
+            };
+
+            // Create a new role object and add the employee and department
+            role addedRole = new role
+            {
+                RoleType = "Head.ToString",
+                employee = addedEmployee,
+                department = addedDept
+            };
+
+            //Save changes to Database
+            db.roles.InsertOnSubmit(addedRole);
+
+            db.SubmitChanges();
+
+            DeleteEmployee delete = new DeleteEmployee();
+            // delete.DeleteStaff("987456");
+            int expected = 1;
+            int actual = delete.deleteCount;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+    }
+}

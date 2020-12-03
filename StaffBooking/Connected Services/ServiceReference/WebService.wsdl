@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://localhost:63341/WebService.asmx" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://localhost:63341/WebService.asmx" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://localhost:63341/WebService.asmx">
+      <s:element name="LoginStaff">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="staffId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginStaffResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LoginStaffResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="staffID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserDetailsResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="MakeRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="staffID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="start" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="end" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MakeRequestResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ViewAllRequests">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="staffID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ViewAllRequestsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ViewAllRequestsResult" type="tns:ArrayOfArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LoginStaffSoapIn">
+    <wsdl:part name="parameters" element="tns:LoginStaff" />
+  </wsdl:message>
+  <wsdl:message name="LoginStaffSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginStaffResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:UserDetails" />
+  </wsdl:message>
+  <wsdl:message name="UserDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:UserDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="MakeRequestSoapIn">
+    <wsdl:part name="parameters" element="tns:MakeRequest" />
+  </wsdl:message>
+  <wsdl:message name="MakeRequestSoapOut">
+    <wsdl:part name="parameters" element="tns:MakeRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="ViewAllRequestsSoapIn">
+    <wsdl:part name="parameters" element="tns:ViewAllRequests" />
+  </wsdl:message>
+  <wsdl:message name="ViewAllRequestsSoapOut">
+    <wsdl:part name="parameters" element="tns:ViewAllRequestsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebServiceSoap">
+    <wsdl:operation name="LoginStaff">
+      <wsdl:input message="tns:LoginStaffSoapIn" />
+      <wsdl:output message="tns:LoginStaffSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserDetails">
+      <wsdl:input message="tns:UserDetailsSoapIn" />
+      <wsdl:output message="tns:UserDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MakeRequest">
+      <wsdl:input message="tns:MakeRequestSoapIn" />
+      <wsdl:output message="tns:MakeRequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ViewAllRequests">
+      <wsdl:input message="tns:ViewAllRequestsSoapIn" />
+      <wsdl:output message="tns:ViewAllRequestsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LoginStaff">
+      <soap:operation soapAction="http://localhost:63341/WebService.asmx/LoginStaff" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserDetails">
+      <soap:operation soapAction="http://localhost:63341/WebService.asmx/UserDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MakeRequest">
+      <soap:operation soapAction="http://localhost:63341/WebService.asmx/MakeRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ViewAllRequests">
+      <soap:operation soapAction="http://localhost:63341/WebService.asmx/ViewAllRequests" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LoginStaff">
+      <soap12:operation soapAction="http://localhost:63341/WebService.asmx/LoginStaff" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserDetails">
+      <soap12:operation soapAction="http://localhost:63341/WebService.asmx/UserDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MakeRequest">
+      <soap12:operation soapAction="http://localhost:63341/WebService.asmx/MakeRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ViewAllRequests">
+      <soap12:operation soapAction="http://localhost:63341/WebService.asmx/ViewAllRequests" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService">
+    <wsdl:port name="WebServiceSoap" binding="tns:WebServiceSoap">
+      <soap:address location="http://localhost:63341/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceSoap12" binding="tns:WebServiceSoap12">
+      <soap12:address location="http://localhost:63341/WebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
